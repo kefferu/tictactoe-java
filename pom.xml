@@ -10,5 +10,9 @@
     <name>Tic Tac Toe</name>
     <description>A simple tic tac toe desktop game</description>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
 </project>
