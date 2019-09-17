@@ -23,15 +23,7 @@ public class MainController {
     private ImageView picCover;
 
     @FXML
-    private Button btnExit;
-
-    @FXML
     private VBox vboxGame;
-
-    @FXML
-    void onBtnExitClick(ActionEvent event) {
-
-    }
 
     @FXML
     void onBtnVsAiClick(ActionEvent event) {
@@ -42,5 +34,13 @@ public class MainController {
     void onBtnVsPlayerClick(ActionEvent event) {
 
     }
+
+    //PUBLIC METHOD BELOW
+
+    public void quitGame() {
+
+    }
+
+    //-------------------
 
 }

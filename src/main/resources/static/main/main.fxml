@@ -48,11 +48,6 @@
                         <Button fx:id="btnVsAi" mnemonicParsing="false" onAction="#onBtnVsAiClick" prefHeight="60.0" prefWidth="100.0" text="VS AI" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onBtnExitClick" prefHeight="60.0" prefWidth="100.0" text="EXIT" />
-                     </children>
-                  </VBox>
                </children>
             </HBox>
          </children>

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    private final String STAGE_TITLE = "";
+    private final String STAGE_TITLE = "Tic Tac Toe";
     private final double MIN_STAGE_WIDTH = 600;
     private final double MIN_STAGE_HEIGHT = 400;
 
@@ -22,7 +22,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/static/com.keffer.tictactoe.main/com.keffer.tictactoe.main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/static/main/main.fxml"));
 
         Parent parent = loader.load();
 
@@ -32,7 +32,7 @@ public class App extends Application {
         primaryStage.setTitle(STAGE_TITLE);
         primaryStage.setMinWidth(MIN_STAGE_WIDTH);
         primaryStage.setMinHeight(MIN_STAGE_HEIGHT);
-        primaryStage.setMaximized(true);
+        primaryStage.setMaximized(false);
         primaryStage.show();
     }
 
