@@ -1,14 +1,19 @@
 package com.keffer.tictactoe.main;
 
-import com.keffer.tictactoe.component.CustomErrorDialog;
+import com.keffer.tictactoe.tictactoe_keffer.PlayMode;
+import com.keffer.tictactoe.tictactoe_keffer.TictactoeKeffer;
+import com.keffer.tictactoe.tictactoe_keffer.TictactoeKefferController;
+import com.keffer.tictactoe.tictactoe_keffer.VsMode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +28,12 @@ import java.util.regex.Pattern;
 public class MainController {
 
     private final String NUMBER_PATTERN = "\\d+";
+    private final String TICTACTOE_KEFFER_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer.fxml";
+
+    private TictactoeKefferController tictactoeKefferController;
+
+    @FXML
+    private BorderPane borderPaneMain;
 
     @FXML
     private Pane btnVsPlayerWrapper;
@@ -32,6 +43,9 @@ public class MainController {
 
     @FXML
     private TextField txtScale;
+
+    @FXML
+    private Label lblScale;
 
     @FXML
     private Button btnVsPlayer;
@@ -48,6 +62,7 @@ public class MainController {
     @FXML
     public void initialize() {
         this.setupValidation();
+
     }
 
     @FXML
@@ -57,15 +72,34 @@ public class MainController {
 
     @FXML
     void onBtnVsPlayerClick(ActionEvent event) {
+        TictactoeKeffer tictactoeKeffer = new TictactoeKeffer(this.TICTACTOE_KEFFER_FXML_PATH, Integer.parseInt(this.txtScale.getText()), VsMode.VS_PLAYER);
+        this.tictactoeKefferController = tictactoeKeffer.getController();
+        this.tictactoeKefferController.setParentController(this);
 
+        this.setMode(PlayMode.PLAY_MODE);
+        this.setGame(tictactoeKeffer.getNode());
     }
 
     //PUBLIC METHOD BELOW
+        public void setGame(Node node) {
+            this.vboxGame.getChildren().add(node);
+        }
 
-    public void checkScale() {
+    public void setMode(PlayMode playMode) {
+        switch (playMode) {
+            case PLAY_MODE:
+                this.txtScale.setVisible(false);
+                this.lblScale.setVisible(false);
+                this.vboxGame.getChildren().remove(this.picCover);
+                break;
 
+            case WAIT_MODE:
+                this.txtScale.setVisible(true);
+                this.lblScale.setVisible(true);
+                this.vboxGame.getChildren().add(this.picCover);
+                break;
+        }
     }
-
     //-------------------
 
     //PRIVATE METHOD BELOW

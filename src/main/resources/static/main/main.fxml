@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.keffer.tictactoe.main.MainController">
+<BorderPane fx:id="borderPaneMain" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.keffer.tictactoe.main.MainController">
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -31,7 +31,7 @@
                <children>
                   <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Scale" />
+                        <Label fx:id="lblScale" text="Scale" />
                         <TextField fx:id="txtScale" alignment="CENTER" maxWidth="40.0" minWidth="40.0" />
                      </children>
                   </VBox>
