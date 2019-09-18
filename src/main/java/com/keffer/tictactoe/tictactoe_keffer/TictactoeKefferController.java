@@ -82,6 +82,7 @@ public class TictactoeKefferController {
         int colIndex = -1;
 
         boolean isWin = false;
+        boolean isDraw = false;
 
         //this looping is to check the row index and col index and what value contained in the last pressed button
         for (Node checkCell : this.gridPaneBoard.getChildren()) {
@@ -133,8 +134,6 @@ public class TictactoeKefferController {
             //check anti diagonal
             if (rowIndex + colIndex == scale - 1) {
 
-                System.out.println("anti row index = " + rowIndex);
-                System.out.println("anti col index = " + colIndex);
                 for(int startRow = 0 ; startRow < this.scale ; startRow++){
                     if(this.getNodeFromGridPane(this.gridPaneBoard, startRow, scale - 1 - startRow).getUserData() != lastState)
                         break;
@@ -146,18 +145,42 @@ public class TictactoeKefferController {
                 }
             }
 
+            //check draw
+            for (Node node : this.gridPaneBoard.getChildren()) {
+                 if (node.getUserData() == null) {
+                     break;
+                 }
+
+                 if (GridPane.getRowIndex(node) == scale - 1 && GridPane.getColumnIndex(node) == scale - 1) {
+                     isDraw = true;
+                 }
+            }
         }
 
         if (isWin) {
             this.parentController.setWinner(lastState);
             return true;
+
+        } else if (isDraw) {
+            return true;
+
+        } else {
+            return false;
         }
-        return false;
+
     }
 
     public void stopGame() {
         for (Node cell : this.gridPaneBoard.getChildren()) {
             cell.setDisable(true);
+        }
+    }
+
+    public void clearCell() {
+        for (Node cell : this.gridPaneBoard.getChildren()) {
+            cell.setDisable(false);
+            cell.setUserData(null);
+            cell.setStyle(null);
         }
     }
 

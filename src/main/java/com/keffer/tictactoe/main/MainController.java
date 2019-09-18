@@ -40,6 +40,12 @@ public class MainController {
     private Pane btnVsAiWrapper;
 
     @FXML
+    private Button btnReset;
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
     private VBox vboxCurrentTurn;
 
     @FXML
@@ -90,6 +96,19 @@ public class MainController {
         this.setGame(tictactoeKeffer.getNode());
     }
 
+    @FXML
+    void onBtnBackClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onBtnResetClick(ActionEvent event) {
+        this.tictactoeKefferController.clearCell();
+        this.imgWinner.setImage(null);
+        this.imgCurrentTurn.setImage(new Image(getClass().getResource("/asset/icomoon/nought.png").toExternalForm()));
+        this.tictactoeKefferController.setCurrentTurn(CurrentTurn.NOUGHT);
+    }
+
     //PUBLIC METHOD BELOW
         public void setGame(Node node) {
             this.vboxGame.getChildren().add(node);
@@ -102,6 +121,8 @@ public class MainController {
                 this.lblScale.setVisible(false);
                 this.btnVsPlayer.setVisible(false);
                 this.btnVsAi.setVisible(false);
+                this.btnReset.setVisible(true);
+                this.btnBack.setVisible(true);
                 this.vboxCurrentTurn.setVisible(true);
                 this.vboxWinner.setVisible(true);
                 this.vboxGame.getChildren().remove(this.picCover);
@@ -110,9 +131,16 @@ public class MainController {
             case WAIT_MODE:
                 this.txtScale.setVisible(true);
                 this.lblScale.setVisible(true);
-                this.vboxCurrentTurn.setVisible(true);
-                this.vboxWinner.setVisible(true);
+                this.btnVsPlayer.setVisible(true);
+                this.btnVsAi.setVisible(true);
+                this.btnReset.setVisible(false);
+                this.btnBack.setVisible(false);
+                this.vboxCurrentTurn.setVisible(false);
+                this.vboxWinner.setVisible(false);
+                this.vboxGame.getChildren().clear();
                 this.vboxGame.getChildren().add(this.picCover);
+                this.imgCurrentTurn.setImage(new Image(getClass().getResource("/asset/icomoon/nought.png").toExternalForm()));
+                this.imgWinner.setImage(null);
                 break;
         }
     }
