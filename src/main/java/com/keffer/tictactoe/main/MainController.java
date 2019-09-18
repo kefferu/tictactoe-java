@@ -98,7 +98,7 @@ public class MainController {
 
     @FXML
     void onBtnBackClick(ActionEvent event) {
-
+        this.setMode(PlayMode.WAIT_MODE);
     }
 
     @FXML
