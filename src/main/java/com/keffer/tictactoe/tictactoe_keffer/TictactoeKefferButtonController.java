@@ -18,20 +18,37 @@ public class TictactoeKefferButtonController {
 
     @FXML
     void onBtnCellClick(ActionEvent event) {
-        CurrentTurn currentTurn = this.parentController.getCurrentTurn();
 
-        this.btnCell.setUserData(currentTurn);
+        if (this.btnCell.getUserData() == null) {
 
-        switch (currentTurn) {
-            case NOUGHT:
-                this.parentController.setCurrentTurn(CurrentTurn.CIRCLE);
-                this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/nought.png);");
-                break;
-            case CIRCLE:
-                this.parentController.setCurrentTurn(CurrentTurn.NOUGHT);
-                this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/circle.png);");
-                break;
+            CurrentTurn lastState = this.parentController.getCurrentTurn();
+            this.btnCell.setUserData(lastState);
+
+            if (!this.parentController.checkWinner(lastState, this.btnCell)) {
+                switch (lastState) {
+                    case NOUGHT:
+                        this.parentController.setCurrentTurn(CurrentTurn.CIRCLE);
+                        this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/nought.png);");
+                        break;
+                    case CIRCLE:
+                        this.parentController.setCurrentTurn(CurrentTurn.NOUGHT);
+                        this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/circle.png);");
+                        break;
+                }
+            } else {
+                System.out.println("win");
+
+                switch (lastState) {
+                    case NOUGHT:
+                        this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/nought.png);");
+                        break;
+                    case CIRCLE:
+                        this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/circle.png);");
+                        break;
+                }
+            }
         }
+
     }
 
     //PUBLIC METHOD BELOW

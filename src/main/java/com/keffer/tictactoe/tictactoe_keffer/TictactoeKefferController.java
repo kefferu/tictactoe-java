@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -19,6 +20,8 @@ import java.util.List;
 public class TictactoeKefferController {
 
     private CurrentTurn currentTurn = CurrentTurn.NOUGHT;
+    private Winner winner = Winner.NOONE;
+    private int scale = 0;
 
     private final String TICTACTOE_KEFFER_CELL_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer-btn-cell.fxml";
 
@@ -30,6 +33,7 @@ public class TictactoeKefferController {
     //PUBLIC METHOD BELOW
     public void setupGame(int scale, VsMode vsMode) {
         VBox.setVgrow(this.gridPaneBoard, Priority.ALWAYS);
+        this.scale = scale;
 
         try {
 
@@ -75,10 +79,95 @@ public class TictactoeKefferController {
         this.currentTurn = currentTurn;
     }
 
+    public boolean checkWinner(CurrentTurn lastState, Button cell) {
+        //-1 value means the value rowindex or colindex has not been intialized
+        int rowIndex = -1;
+        int colIndex = -1;
+
+        //this looping is to check the row index and col index and what value contained in the last pressed button
+        for (Node checkCell : this.gridPaneBoard.getChildren()) {
+
+            if (checkCell.equals(cell)) {
+                rowIndex = this.gridPaneBoard.getRowIndex(checkCell);
+                colIndex = this.gridPaneBoard.getColumnIndex(checkCell);
+                break;
+            }
+        }
+
+        if (rowIndex > -1 && colIndex > -1) {
+            //check col
+            for(int startCol = 0 ; startCol < this.scale ; startCol++){
+                if(this.getNodeFromGridPane(this.gridPaneBoard, rowIndex, startCol).getUserData() != lastState)
+                    break;
+
+                if(startCol == scale-1){
+                    //report win
+                    return true;
+                }
+            }
+
+            //check row
+            for(int startRow = 0 ; startRow < this.scale ; startRow++){
+                if(this.getNodeFromGridPane(this.gridPaneBoard, startRow, colIndex).getUserData() != lastState)
+                    break;
+
+                if(startRow == scale-1){
+                    //report win
+                    return true;
+                }
+            }
+
+            //check diagonal
+            if (rowIndex == colIndex) {
+                System.out.println("row index = " + rowIndex);
+                System.out.println("col index = " + colIndex);
+
+                for(int startIndex = 0 ; startIndex < this.scale ; startIndex++){
+                    if(this.getNodeFromGridPane(this.gridPaneBoard, startIndex, startIndex).getUserData() != lastState)
+                        break;
+
+                    if(startIndex == scale-1){
+                        //report win
+                        return true;
+                    }
+                }
+            }
+
+            //check anti diagonal
+            if (rowIndex + colIndex == scale - 1) {
+
+                System.out.println("anti row index = " + rowIndex);
+                System.out.println("anti col index = " + colIndex);
+                for(int startRow = 0 ; startRow < this.scale ; startRow++){
+                    if(this.getNodeFromGridPane(this.gridPaneBoard, startRow, scale - 1 - startRow).getUserData() != lastState)
+                        break;
+
+                    if(startRow == scale-1){
+                        //report win
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
     public void setParentController(MainController parentController) {
         this.parentController = parentController;
     }
 
     //-------------------
+
+    //PRIVATE METHOD BELOW
+    private Node getNodeFromGridPane(GridPane gridPane, int row, int col) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
+    }
+    //--------------------
 
 }
