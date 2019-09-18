@@ -23,6 +23,7 @@ public class TictactoeKefferController {
     private int scale = 0;
 
     private final String TICTACTOE_KEFFER_CELL_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer-btn-cell.fxml";
+    private final int DEFAULT_SCALE = 3;
 
     private MainController parentController;
 
@@ -48,20 +49,16 @@ public class TictactoeKefferController {
                     GridPane.setValignment(tictactoeCell, VPos.CENTER);
                 }
 
-//                //change the column and row size of grid pane
-//                List<ColumnConstraints> listColConstraint = new ArrayList<ColumnConstraints>();
-//
-//                for (int col = 0 ; col < scale ; col++) {
-//                    ColumnConstraints colCons = new ColumnConstraints();
-//                    colCons.setPercentWidth(100);
-//
-//                    listColConstraint.add(colCons);
-//                }
-//
-//                ColumnConstraints[] arrColCons = new ColumnConstraints[scale];
-//                listColConstraint.toArray(arrColCons);
-//
-//                this.gridPaneBoard.getColumnConstraints().addAll(arrColCons);
+            }
+
+            //add the extra ColumnConstraints and RowConstraints which have the same properties with the first one
+            //so the extra added column and row have the same size as the first one
+            for (int extraCol = 0 ; extraCol < scale - this.DEFAULT_SCALE ; extraCol++) {
+                this.gridPaneBoard.getColumnConstraints().add(this.gridPaneBoard.getColumnConstraints().get(0));
+            }
+
+            for (int extraRow = 0 ; extraRow < scale - this.DEFAULT_SCALE ; extraRow++) {
+                this.gridPaneBoard.getRowConstraints().add(this.gridPaneBoard.getRowConstraints().get(0));
             }
 
         } catch(Exception ex) {
@@ -121,8 +118,6 @@ public class TictactoeKefferController {
 
             //check diagonal
             if (rowIndex == colIndex) {
-                System.out.println("row index = " + rowIndex);
-                System.out.println("col index = " + colIndex);
 
                 for(int startIndex = 0 ; startIndex < this.scale ; startIndex++){
                     if(this.getNodeFromGridPane(this.gridPaneBoard, startIndex, startIndex).getUserData() != lastState)
