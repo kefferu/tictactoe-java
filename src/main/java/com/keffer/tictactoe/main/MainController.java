@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public class MainController {
 
     private final String NUMBER_PATTERN = "\\d+";
+    private final String MORE_THAN_TWO_NUMBER_PATTERN = "\\b[3-9]\\b|[0-9]{2,}+";
     private final String TICTACTOE_KEFFER_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer.fxml";
 
     private TictactoeKefferController tictactoeKefferController;
@@ -146,6 +147,9 @@ public class MainController {
         ArrayList<Validator<String>> validatorList = new ArrayList<Validator<String>>();
         validatorList.add(Validator.createEmptyValidator("Scale field is required", Severity.ERROR));
         validatorList.add(Validator.createRegexValidator("Scale field accepts number only", pattern, Severity.ERROR));
+
+        Pattern patternMoreThanTwo = Pattern.compile(MORE_THAN_TWO_NUMBER_PATTERN);
+        validatorList.add(Validator.createRegexValidator("Scale field accepts more than 2 only", patternMoreThanTwo, Severity.ERROR));
 
         Validator<String>[] validatorArr = new Validator[validatorList.size()];
         validatorList.toArray(validatorArr);
