@@ -18,6 +18,8 @@ import java.util.List;
 
 public class TictactoeKefferController {
 
+    private CurrentTurn currentTurn = CurrentTurn.NOUGHT;
+
     private final String TICTACTOE_KEFFER_CELL_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer-btn-cell.fxml";
 
     private MainController parentController;
@@ -43,26 +45,34 @@ public class TictactoeKefferController {
                     GridPane.setValignment(tictactoeCell, VPos.CENTER);
                 }
 
-                //change the column and row size of grid pane
-                List<ColumnConstraints> listColConstraint = new ArrayList<ColumnConstraints>();
-
-                for (int col = 0 ; col < scale ; col++) {
-                    ColumnConstraints colCons = new ColumnConstraints();
-                    colCons.setPercentWidth(100);
-
-                    listColConstraint.add(colCons);
-                }
-
-                ColumnConstraints[] arrColCons = new ColumnConstraints[scale];
-                listColConstraint.toArray(arrColCons);
-
-                this.gridPaneBoard.getColumnConstraints().addAll(arrColCons);
+//                //change the column and row size of grid pane
+//                List<ColumnConstraints> listColConstraint = new ArrayList<ColumnConstraints>();
+//
+//                for (int col = 0 ; col < scale ; col++) {
+//                    ColumnConstraints colCons = new ColumnConstraints();
+//                    colCons.setPercentWidth(100);
+//
+//                    listColConstraint.add(colCons);
+//                }
+//
+//                ColumnConstraints[] arrColCons = new ColumnConstraints[scale];
+//                listColConstraint.toArray(arrColCons);
+//
+//                this.gridPaneBoard.getColumnConstraints().addAll(arrColCons);
             }
 
         } catch(Exception ex) {
             ex.printStackTrace();
             new CustomErrorDialog().showDialogError(ex.toString());
         }
+    }
+
+    public CurrentTurn getCurrentTurn() {
+        return this.currentTurn;
+    }
+
+    public void setCurrentTurn(CurrentTurn currentTurn) {
+        this.currentTurn = currentTurn;
     }
 
     public void setParentController(MainController parentController) {
