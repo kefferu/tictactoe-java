@@ -1,9 +1,6 @@
 package com.keffer.tictactoe.main;
 
-import com.keffer.tictactoe.tictactoe_keffer.PlayMode;
-import com.keffer.tictactoe.tictactoe_keffer.TictactoeKeffer;
-import com.keffer.tictactoe.tictactoe_keffer.TictactoeKefferController;
-import com.keffer.tictactoe.tictactoe_keffer.VsMode;
+import com.keffer.tictactoe.tictactoe_keffer.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,6 +37,18 @@ public class MainController {
 
     @FXML
     private Pane btnVsAiWrapper;
+
+    @FXML
+    private VBox vboxCurrentTurn;
+
+    @FXML
+    private ImageView imgCurrentTurn;
+
+    @FXML
+    private VBox vboxWinner;
+
+    @FXML
+    private ImageView imgWinner;
 
     @FXML
     private TextField txtScale;
@@ -90,16 +99,43 @@ public class MainController {
             case PLAY_MODE:
                 this.txtScale.setVisible(false);
                 this.lblScale.setVisible(false);
+                this.btnVsPlayer.setVisible(false);
+                this.btnVsAi.setVisible(false);
+                this.vboxCurrentTurn.setVisible(true);
+                this.vboxWinner.setVisible(true);
                 this.vboxGame.getChildren().remove(this.picCover);
                 break;
 
             case WAIT_MODE:
                 this.txtScale.setVisible(true);
                 this.lblScale.setVisible(true);
+                this.vboxCurrentTurn.setVisible(true);
+                this.vboxWinner.setVisible(true);
                 this.vboxGame.getChildren().add(this.picCover);
                 break;
         }
     }
+
+    public void setImgCurrentTurn(CurrentTurn currentTurn) {
+        if (currentTurn == CurrentTurn.NOUGHT) {
+            this.imgCurrentTurn.setImage(new Image(getClass().getResource("/asset/icomoon/nought.png").toExternalForm()));
+
+        } else {
+            this.imgCurrentTurn.setImage(new Image(getClass().getResource("/asset/icomoon/circle.png").toExternalForm()));
+
+        }
+    }
+
+    public void setWinner(CurrentTurn currentTurn) {
+        if (currentTurn == CurrentTurn.NOUGHT) {
+            this.imgWinner.setImage(new Image(getClass().getResource("/asset/icomoon/nought.png").toExternalForm()));
+
+        } else {
+            this.imgWinner.setImage(new Image(getClass().getResource("/asset/icomoon/circle.png").toExternalForm()));
+
+        }
+    }
+
     //-------------------
 
     //PRIVATE METHOD BELOW

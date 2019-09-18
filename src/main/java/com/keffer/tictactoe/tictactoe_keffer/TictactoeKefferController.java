@@ -20,7 +20,6 @@ import java.util.List;
 public class TictactoeKefferController {
 
     private CurrentTurn currentTurn = CurrentTurn.NOUGHT;
-    private Winner winner = Winner.NOONE;
     private int scale = 0;
 
     private final String TICTACTOE_KEFFER_CELL_FXML_PATH = "/static/tictactoe-keffer/tictactoe-keffer-btn-cell.fxml";
@@ -77,12 +76,15 @@ public class TictactoeKefferController {
 
     public void setCurrentTurn(CurrentTurn currentTurn) {
         this.currentTurn = currentTurn;
+        this.parentController.setImgCurrentTurn(currentTurn);
     }
 
     public boolean checkWinner(CurrentTurn lastState, Button cell) {
         //-1 value means the value rowindex or colindex has not been intialized
         int rowIndex = -1;
         int colIndex = -1;
+
+        boolean isWin = false;
 
         //this looping is to check the row index and col index and what value contained in the last pressed button
         for (Node checkCell : this.gridPaneBoard.getChildren()) {
@@ -102,7 +104,7 @@ public class TictactoeKefferController {
 
                 if(startCol == scale-1){
                     //report win
-                    return true;
+                    isWin = true;
                 }
             }
 
@@ -113,7 +115,7 @@ public class TictactoeKefferController {
 
                 if(startRow == scale-1){
                     //report win
-                    return true;
+                    isWin = true;
                 }
             }
 
@@ -128,7 +130,7 @@ public class TictactoeKefferController {
 
                     if(startIndex == scale-1){
                         //report win
-                        return true;
+                        isWin = true;
                     }
                 }
             }
@@ -144,13 +146,24 @@ public class TictactoeKefferController {
 
                     if(startRow == scale-1){
                         //report win
-                        return true;
+                        isWin = true;
                     }
                 }
             }
 
         }
+
+        if (isWin) {
+            this.parentController.setWinner(lastState);
+            return true;
+        }
         return false;
+    }
+
+    public void stopGame() {
+        for (Node cell : this.gridPaneBoard.getChildren()) {
+            cell.setDisable(true);
+        }
     }
 
     public void setParentController(MainController parentController) {
@@ -168,6 +181,8 @@ public class TictactoeKefferController {
         }
         return null;
     }
+
+
     //--------------------
 
 }

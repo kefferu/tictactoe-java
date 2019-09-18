@@ -36,8 +36,6 @@ public class TictactoeKefferButtonController {
                         break;
                 }
             } else {
-                System.out.println("win");
-
                 switch (lastState) {
                     case NOUGHT:
                         this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/nought.png);");
@@ -46,6 +44,7 @@ public class TictactoeKefferButtonController {
                         this.btnCell.setStyle("-fx-graphic:url(/asset/icomoon/circle.png);");
                         break;
                 }
+                this.parentController.stopGame();
             }
         }
 
