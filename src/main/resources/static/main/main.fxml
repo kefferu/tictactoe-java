@@ -52,7 +52,7 @@
                      <children>
                         <Pane fx:id="btnVsAiWrapper" maxHeight="60.0" maxWidth="100.0" minHeight="60.0" minWidth="100.0" prefHeight="60.0" prefWidth="100.0">
                            <children>
-                              <Button fx:id="btnVsAi" mnemonicParsing="false" onAction="#onBtnVsAiClick" prefHeight="60.0" prefWidth="100.0" text="VS AI" />
+                              <Button fx:id="btnVsAi" mnemonicParsing="false" onAction="#onBtnVsAiClick" prefHeight="60.0" prefWidth="100.0" text="VS AI" visible="false" />
                            </children>
                         </Pane>
                      </children>

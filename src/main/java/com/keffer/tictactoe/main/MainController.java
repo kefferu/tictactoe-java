@@ -110,7 +110,7 @@ public class MainController {
     }
 
     //PUBLIC METHOD BELOW
-        public void setGame(Node node) {
+    public void setGame(Node node) {
             this.vboxGame.getChildren().add(node);
         }
 
@@ -120,7 +120,7 @@ public class MainController {
                 this.txtScale.setVisible(false);
                 this.lblScale.setVisible(false);
                 this.btnVsPlayer.setVisible(false);
-                this.btnVsAi.setVisible(false);
+//                this.btnVsAi.setVisible(false);
                 this.btnReset.setVisible(true);
                 this.btnBack.setVisible(true);
                 this.vboxCurrentTurn.setVisible(true);
@@ -132,7 +132,7 @@ public class MainController {
                 this.txtScale.setVisible(true);
                 this.lblScale.setVisible(true);
                 this.btnVsPlayer.setVisible(true);
-                this.btnVsAi.setVisible(true);
+//                this.btnVsAi.setVisible(true);
                 this.btnReset.setVisible(false);
                 this.btnBack.setVisible(false);
                 this.vboxCurrentTurn.setVisible(false);
